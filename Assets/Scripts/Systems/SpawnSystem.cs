@@ -48,7 +48,9 @@ public partial struct ProcessSpawnerJob : IJobEntity
 
             Entity newEntity = Ecb.Instantiate(chunkIndex, spawner.Prefab);
 
-            Ecb.SetComponent(chunkIndex, newEntity, LocalTransform.FromPosition(r.NextFloat3() * 10 - 5));
+            float3 spawnPosition = new float3((r.NextFloat() - 0.5f) * 5, 0, (r.NextFloat() - 0.5f) * 10);
+
+            Ecb.SetComponent(chunkIndex, newEntity, LocalTransform.FromPosition(spawnPosition));
 
             spawner.NextSpawnTime = (float)ElapsedTime + spawner.SpawnRate;
         }
